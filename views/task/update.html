@@ -3,19 +3,25 @@
 {{ define "main" }}
 
 <div>
+    <br>
+    <h1>Update Task</h1>
+    <br>
     <form action="/tasks/edit" method="post">
         <input type="text" name="id" id="id" value="{{ .Id }}" hidden>
+        <input type="text" name="sendToId" id="sendToId" value="{{ .SendToId }}" hidden>
         <div class="form-group">
             <label for="taskDetail">Detail : </label>
-            <textarea class="form-control" id="taskDetail" name="taskDetail" rows="3">{{ .TaskDetail }}</textarea>
+            <textarea class="form-control" id="taskDetail" name="taskDetail" rows="3" required>{{ .TaskDetail }}</textarea>
         </div>
         <div class="form-group">
             <label for="sendToName">Send To :</label>
-            <input type="text" class="form-control" id="sendToName" name="sendToName" value="{{ .SendToName }}">
+            <!-- <input type="text" class="form-control" id="sendToName" name="sendToName" value="{{ .SendToName }}" required> -->
+            <select class="form-control" name="sendToName" id="sendToName">
+            </select>
         </div>
         <div class="form-group">
             <label for="taskDeadLine">Task Deadline : </label>
-            <input type="date" class="form-control" name="taskDeadLine" id="taskDeadLine" value="{{ .TaskDeadLine }}">
+            <input type="date" class="form-control" name="taskDeadLine" id="taskDeadLine" value="{{ .TaskDeadLine }}" required>
         </div>
 
         <input type="submit" class="btn btn-primary" value="Update Task">

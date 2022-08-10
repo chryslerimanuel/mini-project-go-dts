@@ -3,6 +3,8 @@
 {{ define "main" }}
 
 <div>
+    <h1>Menu User</h1>
+    <br>
     <a href="/users/add" class="btn btn-success mb-2" id="btn-addUser">
         Tambah user
     </a>
@@ -27,12 +29,14 @@
                     <td>{{ .RoleId }}</td>
                     <td>{{ .IsActive }}</td>
                     <td>
+                      {{ if ne .Id 1 }}
                         <a href="/users/view?id={{ .Id }}&state=2" class="btn btn-primary mb-2" style="width: auto;" id="btn-editUser">
                             Edit user
                         </a>
                         <a href="javascript:void(0)" class="btn btn-danger mb-2" style="width: auto;" id="btn-deleteUser" onclick="modalDelUser('{{ .Id }}')">
                             Delete user
                         </a>
+                      {{ end }}
                     </td>
                 </tr>
                 {{ end }}

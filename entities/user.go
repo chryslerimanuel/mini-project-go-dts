@@ -181,3 +181,41 @@ func (u User) Select(id int) (User, error) {
 
 	return u, nil
 }
+
+func (u User) FindAllWithFilter(searchParam string) ([]User, error) {
+	db, err := configs.GetConnection()
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+
+	query := "SELECT * FROM user WHERE IsActive = true AND Name LIKE ? ;"
+
+	ctx, cancelfunc := context.WithTimeout(context.Background(), 60*time.Second)
+	defer cancelfunc()
+	stmt, err := db.PrepareContext(ctx, query)
+	if err != nil {
+		log.Printf("Error %s when preparing SQL statement", err)
+		return nil, err
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.QueryContext(ctx, "%"+searchParam+"%")
+	if err != nil {
+		log.Printf("Error %s when getting rows from user table", err)
+		return nil, err
+	}
+	defer rows.Close()
+
+	var users []User
+	for rows.Next() {
+		var u User
+		err = rows.Scan(&u.Id, &u.Name, &u.RoleId, &u.IsActive)
+		if err != nil {
+			panic(err)
+		}
+		users = append(users, u)
+	}
+
+	return users, nil
+}

@@ -1,11 +1,12 @@
 package controllers
 
 import (
-	"mini-project-go-dts/entities"
 	"log"
+	"mini-project-go-dts/entities"
 	"net/http"
 	"path"
 	"strconv"
+	"strings"
 	"text/template"
 )
 
@@ -35,7 +36,11 @@ func CreateTaskHandler(w http.ResponseWriter, r *http.Request) {
 	sendToName := r.FormValue("sendToName")
 	taskDeadLine := r.FormValue("taskDeadLine")
 
-	task := entities.Task{TaskDetail: taskDetail, CreatedByName: "Admin", SendToName: sendToName, TaskDeadLine: taskDeadLine}
+	split := strings.Split(sendToName, "~")
+	uId, _ := strconv.Atoi(split[0])
+	uName := split[1]
+
+	task := entities.Task{TaskDetail: taskDetail, CreatedByName: "Admin", SendToId: uId, SendToName: uName, TaskDeadLine: taskDeadLine}
 
 	err := task.Insert()
 	if err != nil {
@@ -76,7 +81,11 @@ func UpdateTaskHandler(w http.ResponseWriter, r *http.Request) {
 		panic(err.Error())
 	}
 
-	task := entities.Task{TaskDetail: taskDetail, SendToName: sendToName, TaskDeadLine: taskDeadLine}
+	split := strings.Split(sendToName, "~")
+	uId, _ := strconv.Atoi(split[0])
+	uName := split[1]
+
+	task := entities.Task{TaskDetail: taskDetail, SendToId: uId, SendToName: uName, TaskDeadLine: taskDeadLine}
 
 	err = task.Update(idInt)
 	if err != nil {

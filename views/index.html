@@ -1,26 +1,80 @@
-{{ template "layout" . }}
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Project Golang</title>
 
-{{ define "main" }}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
-<div class="welcome-title">
-    <h1>Selamat datang. </h1>
-    <h3>Website ini dibangun sebagai tugas mini project dari Digitalent PROA Gol Batch 3 yang diselenggarakan oleh Kominfo dan Progate</h3>
-</div>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<div class="pilih-menu">
-    <h4>Silahkan pilih menu</h4>
-</div>
+    <script src="/static/js/script.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
 
-<div class="row">
-    <div class="btn-menu btn-user">
-        <a href="/users" class="btn btn-secondary">Menu User</a>
+<body>
+    <div class="header">
+        <a href="/">Index</a>
     </div>
 
-    <div class="btn-menu btn-task">
-        <a href="/tasks" class="btn btn-secondary">Menu Task</a>
+    <div class="top-wrapper">
+        <div class="container">
+            <div class="welcome-title">
+                <h1>Selamat datang. </h1>
+                <h3>Website ini dibuat sebagai tugas mini project dari Digitalent PROA Gol Batch 3 yang
+                    diselenggarakan
+                    oleh
+                    Kominfo dan Progate</h3>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="container">
+        <div class="pilih-menu">
+            <h4>Silahkan pilih menu</h4>
+        </div>
 
+        <div class="row bodyIndex">
+            <div class="column menuIndex">
+                <div class="btnUtama">
+                    <a href="/users" class="btn btn-primary">Menu User</a>
+                </div>
+                <div class="btnKedua">
+                    <a href="#infoUser" class="btn btn-secondary" data-toggle="collapse">Tentang menu user</a>
+                    <div id="infoUser" class="collapse" style="text-align: center; width: 85%;">
+                        Menu user berfungsi untuk management akun user yang ada di website ini. Kita bisa menambahkan
+                        user baru yang nantinya dapat digunakan untuk menjadi tujuan pengiriman task yang dibuat di menu
+                        task
+                    </div>
+                </div>
+            </div>
+            <div class="column menuIndex">
+                <div class="btnUtama">
+                    <a href="/tasks" class="btn btn-success">Menu Task</a>
+                </div>
+                <div class="btnKedua">
+                    <a href="#infoTask" class="btn btn-secondary" data-toggle="collapse">Tentang menu task</a>
+                    <div id="infoTask" class="collapse" style="text-align: center; width: 85%;">
+                        Pada menu task kita bisa membuat task / to do list yang nantinya
+                        bisa di assign ke user siapa task ini ditujukan. Selain itu ada juga fitur mark as done yang
+                        gunanya
+                        untuk menandakan bahwa task yang di buat sudah selesai di kerjakan.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-{{ end }}
+    <div class="footer">
+        <h6>Chrysler Imanuel | 152308829101-126</h6>
+    </div>
+</body>
+
+</html>

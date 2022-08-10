@@ -1,8 +1,9 @@
 package controllers
 
 import (
-	"mini-project-go-dts/entities"
+	"encoding/json"
 	"log"
+	"mini-project-go-dts/entities"
 	"net/http"
 	"path"
 	"strconv"
@@ -150,18 +151,55 @@ func SelectOneUserHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 	} else {
-		tmpl, err := template.ParseFiles(path.Join("views", "user", "view.html"), path.Join("views", "layout.html"))
+
+		type data struct {
+			Id   string `json:"id"`
+			Text string `json:"text"`
+		}
+
+		var d data
+		d.Id = strconv.Itoa(res.Id) + "~" + res.Name
+		d.Text = res.Name
+
+		jsonInBytes, err := json.Marshal(d)
 		if err != nil {
-			log.Printf("Errors %s load template", err)
-			http.Error(w, "An error has occured.", http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
-		err = tmpl.Execute(w, res)
-		if err != nil {
-			log.Printf("Errors %s execute template", err)
-			http.Error(w, "An error has occured.", http.StatusInternalServerError)
-			return
-		}
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(jsonInBytes)
 	}
+}
+
+func DropdownUser(w http.ResponseWriter, r *http.Request) {
+	term := r.URL.Query().Get("searchTerm")
+
+	type data struct {
+		Id   string `json:"id"`
+		Text string `json:"text"`
+	}
+
+	var user entities.User
+	res, err := user.FindAllWithFilter(term)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	var datas []data
+	for _, re := range res {
+		var d data
+		d.Id = strconv.Itoa(re.Id) + "~" + re.Name
+		d.Text = re.Name
+		datas = append(datas, d)
+	}
+
+	jsonInBytes, err := json.Marshal(datas)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(jsonInBytes)
 }

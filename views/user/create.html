@@ -3,18 +3,21 @@
 {{ define "main" }}
 
 <div>
+    <br>
+    <h1>Tambah User</h1>
+    <br>
     <form action="/users/add" method="post">
         <p style="display: none;">{{ .Id }}</p>
         <div class="form-group">
             <label for="name">Nama : </label>
-            <input type="text" name="name" id="name">
+            <input type="text" class="form-control" name="name" id="name" required>
         </div>
         <div class="form-group">
             <label for="roleId">Role Id : </label>
-            <input type="number" name="roleId" id="roleId">
+            <input type="number" class="form-control" name="roleId" id="roleId" min="1" required>
         </div>
 
-        <input type="submit" value="Create User">
+        <input type="submit" class="btn btn-primary" value="Create User">
     </form>
 </div>
 

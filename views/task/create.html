@@ -3,18 +3,22 @@
 {{ define "main" }}
 
 <div>
+    <br>
+    <h1>Tambah Task</h1>
+    <br>
     <form action="/tasks/add" method="post">
         <div class="form-group">
-            <label for="taskDetail">Detail : </label>
-            <textarea class="form-control" id="taskDetail" name="taskDetail" rows="3"></textarea>
+            <label for="taskDetail">DetailTask :</label>
+            <textarea class="form-control" id="taskDetail" name="taskDetail" rows="3" required></textarea>
         </div>
         <div class="form-group">
             <label for="sendToName">Send To :</label>
-            <input type="text" class="form-control" id="sendToName" name="sendToName">
+            <select class="form-control" name="sendToName" id="sendToName">
+            </select>
         </div>
         <div class="form-group">
-            <label for="taskDeadLine">Task Deadline : </label>
-            <input type="date" class="form-control" name="taskDeadLine" id="taskDeadLine">
+            <label for="taskDeadLine">Task Deadline :</label>
+            <input type="date" class="form-control" name="taskDeadLine" id="taskDeadLine" required>
         </div>
 
         <input type="submit" class="btn btn-primary" value="Create Task">

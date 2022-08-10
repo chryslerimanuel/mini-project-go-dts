@@ -39,7 +39,7 @@ func (t Task) Insert() error {
 	}
 	defer db.Close()
 
-	query := "INSERT INTO task (`TaskDetail`, `CreatedById`, `CreatedByName`, `SendToId`, `SendToName`, `TaskDeadLine`, `IsDone`, `IsActive`) VALUES ( ?, 1, ?, 1, ?, ?, false, true );"
+	query := "INSERT INTO task (`TaskDetail`, `CreatedById`, `CreatedByName`, `SendToId`, `SendToName`, `TaskDeadLine`, `IsDone`, `IsActive`) VALUES ( ?, 1, ?, ?, ?, ?, false, true );"
 
 	ctx, cancelfunc := context.WithTimeout(context.Background(), 60*time.Second)
 	defer cancelfunc()
@@ -50,7 +50,7 @@ func (t Task) Insert() error {
 	}
 	defer stmt.Close()
 
-	res, err := stmt.ExecContext(ctx, t.TaskDetail, t.CreatedByName, t.SendToName, t.TaskDeadLine)
+	res, err := stmt.ExecContext(ctx, t.TaskDetail, t.CreatedByName, t.SendToId, t.SendToName, t.TaskDeadLine)
 	if err != nil {
 		log.Printf("Error %s when inserting row into task table", err)
 		// return err
@@ -73,7 +73,7 @@ func (t Task) Update(id int) error {
 	}
 	defer db.Close()
 
-	query := "UPDATE task SET TaskDetail = ?, SendToName = ?, TaskDeadLine = ? WHERE Id = ?"
+	query := "UPDATE task SET TaskDetail = ?, SendToId = ?, SendToName = ?, TaskDeadLine = ? WHERE Id = ?"
 
 	ctx, cancelfunc := context.WithTimeout(context.Background(), 60*time.Second)
 	defer cancelfunc()
@@ -84,7 +84,7 @@ func (t Task) Update(id int) error {
 	}
 	defer stmt.Close()
 
-	res, err := stmt.ExecContext(ctx, t.TaskDetail, t.SendToName, t.TaskDeadLine, id)
+	res, err := stmt.ExecContext(ctx, t.TaskDetail, t.SendToId, t.SendToName, t.TaskDeadLine, id)
 	if err != nil {
 		log.Printf("Error %s when updating row into task table", err)
 		return err

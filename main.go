@@ -27,6 +27,7 @@ func main() {
 	http.HandleFunc("/users/add", controllers.CreateUserHandler)
 	http.HandleFunc("/users/edit", controllers.UpdateUserHandler)
 	http.HandleFunc("/users/delete", controllers.DeleteUserHandler)
+	http.HandleFunc("/users/dropdown", controllers.DropdownUser)
 
 	// task
 	http.HandleFunc("/tasks", controllers.LoadDataTaskHandler)
