@@ -1,0 +1,26 @@
+{{ template "layout" . }}
+
+
+{{ define "main" }}
+
+<div class="welcome-title">
+    <h1>Selamat datang. </h1>
+    <h3>Website ini dibangun sebagai tugas mini project dari Digitalent PROA Gol Batch 3 yang diselenggarakan oleh Kominfo dan Progate</h3>
+</div>
+
+<div class="pilih-menu">
+    <h4>Silahkan pilih menu</h4>
+</div>
+
+<div class="row">
+    <div class="btn-menu btn-user">
+        <a href="/users" class="btn btn-secondary">Menu User</a>
+    </div>
+
+    <div class="btn-menu btn-task">
+        <a href="/tasks" class="btn btn-secondary">Menu Task</a>
+    </div>
+</div>
+
+
+{{ end }}

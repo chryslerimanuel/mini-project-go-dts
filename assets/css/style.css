@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body,
+ul, ol, li,
+h1, h2, h3, h4, h5, h6, p, div {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header {
+  height: 7vh;
+  width: 100%;
+  background-color: rgba(107, 188, 7, 0.7);
+  position :fixed;
+  top: 0;
+  z-index: 10;
+}
+
+
+.footer {
+  height: 10vh;
+  background-color: yellowgreen;
+  display: block;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+.btn-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 25vh;
+}
+
+.btn-menu a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 50%;
+}
+
+.welcome-title h1 {
+  text-align: center;
+}
+
+.welcome-title h3 {
+  text-align: center;
+}
+
+.pilih-menu {
+  margin-top: 5%;
+}
+
+.pilih-menu h4 {
+  text-align: center;
+}
+
+.modal-dialog {
+  height: 100vh !important;
+  display: flex;
+}
+
+.modal-content {
+  margin: auto !important;
+  height: fit-content !important;
+}
+
+#modalDelUser {
+  display: 'flex';
+  justify-content: 'center';
+  align-items: 'center';
+}
+
+

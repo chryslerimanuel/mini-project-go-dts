@@ -1,0 +1,60 @@
+{{ template "layout" .}}
+
+{{ define "main" }}
+
+<div>
+    <a href="/tasks/add" class="btn btn-success mb-2" id="btn-addUser">
+        Tambah Task
+    </a>
+    
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="width: 5%;">ID</th>
+                    <th style="width: 30%;">Detail</th>
+                    <th style="width: 10%;">Created By</th>
+                    <th style="width: 10%;">Send To</th>
+                    <th style="width: 10%;">Deadline</th>
+                    <th style="width: 15%;">Status</th>
+                    <th style="width: 20%;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ if . }}
+                {{ range .}}
+                <tr>
+                    <td>{{ .Id }}</td>
+                    <td>{{ .TaskDetail }}</td>
+                    <td>{{ .CreatedByName }}</td>
+                    <td>{{ .SendToName }}</td>
+                    <td>{{ .TaskDeadLine }}</td>
+                    <td>
+                        {{ if .IsDone }}
+                        <a href="javascript:void(0)" class="btn btn-success" style="width: auto;">
+                            Done  
+                          </a>                      
+                        {{ end }}
+                        {{ if not .IsDone }}
+                        <a href="/tasks/updatestatus?id={{ .Id }}" class="btn btn-secondary" style="width: auto;">
+                          Mark As Done
+                        </a>    
+                        {{ end }}
+                    </td>
+                    <td>
+                        <a href="/tasks/view?id={{ .Id }}&state=2" class="btn btn-primary" style="width: auto;">
+                            Edit Task
+                        </a>
+                        <a href="/tasks/delete?id={{ .Id }}" class="btn btn-danger" style="width: auto;" id="btn-deleteUser" onclick="return confirm('Are you sure you want to delete this task?')">
+                          Delete Task
+                      </a>
+                    </td>
+                </tr>
+                {{ end }}
+                {{ end }}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{{ end }}
